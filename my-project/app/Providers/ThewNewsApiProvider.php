@@ -36,7 +36,7 @@ class ThewNewsApiProvider extends ServiceProvider
                 foreach ($articles as $article) {
                     if (
                         (!isset($article['title']) ||
-                            (empty($article['description']) && empty($article['snippet']))) ||
+                            (empty($article['description']) )) ||
                         empty($article['image_url'])
                     ) {
                         continue;

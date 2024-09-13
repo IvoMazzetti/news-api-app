@@ -46,7 +46,7 @@ export default function UpdateUserSettings({ categories, authors, sources, user_
 
     return (
         <AuthenticatedLayout user={auth.user}>
-            <section className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+            <section className="max-w-4xl mx-auto mt-10 p-6 bg-white  rounded-lg">
                 <header className="flex justify-between border-b pb-4 mb-6">
                     <div>
                         <h2 className="text-2xl font-semibold text-gray-900">News Settings</h2>

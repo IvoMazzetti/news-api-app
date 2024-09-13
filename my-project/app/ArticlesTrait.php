@@ -21,11 +21,13 @@ trait ArticlesTrait
     {
         $publishedAt = $this->treatPublishedAtArticle($publishedAt);
 
+        $sourceName = is_array($article['source']) ? ($source['name'] ?? null) : $article['source'];
+
         Article::updateOrCreate(
             ['title' => $article['title']],
             [
-                'source_id' => $article['source']['id'] ?? $article['source']?? null,
-                'source_name' => $article['source']['name'] ?? $article['source'] ?? null,
+                'source_id' => $article['source']['id'] ?? null,
+                'source_name' => $sourceName,
                 'author' => $article['author'] ?? null,
                 'title' => $article['title'],
                 'description' => $article['description'] ?? null,
@@ -33,7 +35,7 @@ trait ArticlesTrait
                 'url' => $article['url'],
                 'url_to_image' => $article['urlToImage'] ?? $article['image_url'] ?? null,
                 'published_at' => $publishedAt,
-                'content' => $article['content'] ?? $article['snippet'] ?? null,
+                'content' => $article['content'] ?? null,
             ]
         );
 

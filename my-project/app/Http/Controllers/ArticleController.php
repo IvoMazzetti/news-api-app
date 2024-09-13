@@ -43,8 +43,8 @@ class ArticleController extends Controller
             $preferences = $this->fetchUserPreferences($request->input('userId'));
 
             // Use preferences if no specific inputs are provided for filters
-            $filters['sources'] = $preferences['preferred_sources'];
-            $filters['category'] = $preferences['preferred_categories'];
+            $filters['sources'] = $preferences['preferred_sources'] ?? null;
+            $filters['category'] = $preferences['preferred_categories'] ?? null;
         }
 
         // Ensure 'category' is an array (handle comma-separated strings)
@@ -89,9 +89,12 @@ class ArticleController extends Controller
             ->first(['preferred_authors', 'preferred_categories', 'preferred_sources']);
 
         return [
-            'preferred_authors'    => $preferences->preferred_authors ? json_decode($preferences->preferred_authors, true) : [],
-            'preferred_categories' => collect(json_decode($preferences->preferred_categories, true))->map(fn($category) => trim($category[1]))->toArray(),
-            'preferred_sources'    => collect(json_decode($preferences->preferred_sources, true))->map(fn($source) => trim($source[1]))->toArray()
+            'preferred_authors' => $preferences ? ($preferences->preferred_authors ? json_decode($preferences->preferred_authors, true) : []) : [],
+            'preferred_categories' => $preferences ? ($preferences->preferred_categories ? collect(json_decode($preferences->preferred_categories, true))
+                ->map(fn($category) => trim($category[1]))->toArray() : []) : [],
+            'preferred_sources' => $preferences ? ($preferences->preferred_sources ? collect(json_decode($preferences->preferred_sources, true))
+                ->map(fn($source) => trim($source[1]))->toArray() : []) : []
         ];
+
     }
 }

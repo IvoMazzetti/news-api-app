@@ -29,6 +29,7 @@ export default function Dashboard({id, auth}) {
                 params: {...filters, ...filterParams}
             });
 
+            console.log(response);
 
             if (Array.isArray(response.data.articles.data)) {
                 setArticles(response.data.articles.data);
