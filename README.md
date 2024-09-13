@@ -39,7 +39,17 @@ docker-compose up --build -d
 
 This command will build the Docker images and run the containers in detached mode.
 
-### 3. Run Artisan Commands
+### 3. Install PHP Dependencies
+
+Inside the Docker container, install the PHP dependencies using Composer:
+
+<p>
+<pre>
+docker-compose exec app composer install
+</pre>
+</p>
+
+### 4. Run Artisan Commands
 
 Once the containers are up, you need to run Artisan commands inside the Docker container for Laravel. Use the following commands:
 
@@ -53,7 +63,7 @@ docker-compose exec app php artisan schedule:work
 - `php artisan migrate` applies the database migrations.
 - `php artisan schedule:work` starts the Laravel scheduler.
 
-### 4. Install Frontend Dependencies
+### 5. Install Frontend Dependencies
 
 Navigate to the frontend directory and install the required npm packages:
 
@@ -65,7 +75,7 @@ npm install
 </pre>
 </p>
 
-### 5. Build and Run the Frontend
+### 6. Build and Run the Frontend
 
 Build and run the React application:
 
