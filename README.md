@@ -27,9 +27,27 @@ cd my-project
 </pre>
 </p>
 
-### 2. Build Docker Images and Start Containers
+### 2. Install PHP Dependencies
 
-Build the Docker images and start the containers using Docker Compose:
+Before starting the Docker containers, install the PHP dependencies using Composer:
+
+<p>
+<pre>
+composer install
+</pre>
+</p>
+
+### 3. Build Docker Images and Start Containers
+
+Build the Docker images and start the containers using Sail or Docker Compose:
+
+<p>
+<pre>
+vendor/bin/sail up --build -d
+</pre>
+</p>
+
+or
 
 <p>
 <pre>
@@ -37,21 +55,20 @@ docker-compose up --build -d
 </pre>
 </p>
 
-This command will build the Docker images and run the containers in detached mode.
-
-### 3. Install PHP Dependencies
-
-Inside the Docker container, install the PHP dependencies using Composer:
-
-<p>
-<pre>
-docker-compose exec app composer install
-</pre>
-</p>
+Both commands will build the Docker images and run the containers in detached mode. Use Sail if you have it set up for your Laravel project.
 
 ### 4. Run Artisan Commands
 
-Once the containers are up, you need to run Artisan commands inside the Docker container for Laravel. Use the following commands:
+Once the containers are up, you need to run Artisan commands inside the Docker container for Laravel. Use Sail or Docker Compose for these commands:
+
+<p>
+<pre>
+vendor/bin/sail php artisan migrate
+vendor/bin/sail php artisan schedule:work
+</pre>
+</p>
+
+or
 
 <p>
 <pre>
