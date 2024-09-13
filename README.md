@@ -63,19 +63,7 @@ docker-compose exec app php artisan schedule:work
 - `php artisan migrate` applies the database migrations.
 - `php artisan schedule:work` starts the Laravel scheduler.
 
-### 5. Install Frontend Dependencies
-
-Navigate to the frontend directory and install the required npm packages:
-
-<p>
-<pre>
-docker-compose exec app bash
-cd /var/www/html/frontend
-npm install
-</pre>
-</p>
-
-### 6. Build and Run the Frontend
+### 5. Build and Run the Frontend
 
 Build and run the React application:
 
