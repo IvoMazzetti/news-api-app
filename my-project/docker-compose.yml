@@ -1,0 +1,36 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel-app
+        volumes:
+            - .:/var/www/html
+        networks:
+            - laravel
+
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        ports:
+            - "8000:80"  # Maps port 80 in the container to port 8000 on the host
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+            - .:/var/www/html
+        networks:
+            - laravel
+
+    mysql:
+        image: mysql:5.7
+        container_name: mysql-db
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+        ports:
+            - "3306:3306"
+        networks:
+            - laravel
+
+networks:
+    laravel:
+        driver: bridge
